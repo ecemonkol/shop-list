@@ -3,6 +3,7 @@ html, body {
     padding: 0;
     font-family: 'Rubik', sans-serif;
     background-color: #EEF0F4;
+    user-select: none;
 }
 
 h1 {
@@ -10,11 +11,16 @@ h1 {
     text-align: center;
 }
 
+h2 {
+    font-family: monospace;
+    margin-left: 60px;
+   
+}
 
 .container {
     display: flex;
     flex-direction: column;
-    max-width: 300px;
+    max-width: 320px;
     max-height: 500px;
     margin: 30px auto;
     padding: 20px;
@@ -26,6 +32,19 @@ h1 {
 img {
     width: 250px;
     margin: 0 auto;
+}
+
+img:hover {
+    animation: rotate-infinite 3s linear infinite; 
+}
+
+@keyframes rotate-infinite {
+    from {
+        transform: rotate(0deg); 
+    }
+    to {
+        transform: rotate(360deg); 
+    }
 }
 
 input {
@@ -49,12 +68,12 @@ input::placeholder {
 }
 
 input:hover {
-    outline: solid tomato 4px;
+    outline: solid #ff3399  4px;
 }
 
 button {
     color: #FDFDFD;
-    background-color: #FFC122;
+    background-color: rgb(18, 158, 74);
     border: none;
     padding: 15px;
     border-radius: 30px;
@@ -65,7 +84,7 @@ button {
 }
 
 button:hover {
-    outline: solid tomato 4px;
+    outline: solid #ff3399 4px;
 }
 
 ul {
@@ -84,4 +103,14 @@ ul li {
     flex-grow: 1;
     text-align: center;
     font-family: monospace;
+    
+}
+
+li:hover {animation: shaking 0.5s infinite;}
+  @keyframes shaking {
+      0% {transform: rotate(0deg);}
+      20% {transform: rotate(-3deg);}
+      50% {transform: rotate(0deg);}
+      70% {transform: rotate(3deg);}
+      100% {transform: rotate(0deg);}
 }
