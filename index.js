@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js"
-import { getDatabase, ref, push, onValue } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js"
+import { getDatabase, ref, push, onValue, remove } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js"
 
 const appSettings = {
     databaseURL: "https://shop-list-63cfe-default-rtdb.europe-west1.firebasedatabase.app/"
@@ -11,7 +11,7 @@ const shoppingListInDB = ref(database, "shoppingList")
 
 const inputFieldEl = document.getElementById("input-field")
 const addButtonEl = document.getElementById("add-button")
-const listEl = document.getElementById("shopping-list")
+const shoppingListEl = document.getElementById("shopping-list")
 
 addButtonEl.addEventListener("click", function() {
     let inputValue = inputFieldEl.value
@@ -29,7 +29,8 @@ onValue(shoppingListInDB, function(snapshot) {
 
     let itemsArray = Object.entries(snapshot.val());
 
-    clearListEl();
+    clearShoppingListEl();
+   
 
     for (let i=0; i<itemsArray.length; i++) {
         let currentItem = itemsArray[i];
@@ -39,9 +40,14 @@ onValue(shoppingListInDB, function(snapshot) {
         appendItemToListEl(currentItem);
     }
 
+    
     console.log(itemsArray)
 
 } )
+
+function clearShoppingListEl() {
+    shoppingListEl.innerHTML = ""
+}
 
 function clearInputFieldEl() {
     inputFieldEl.value = ""
@@ -55,22 +61,33 @@ function appendItemToListEl(item) {
         let newEl = document.createElement('li');
         newEl.textContent = itemValue;
 
+        addRandomColor(newEl);
+
+        newEl.addEventListener("click", function(event) {
+
+            event.stopPropagation();
+            // Remove from DOM
+            newEl.remove();
+            
+            // Remove from database
+            let exactLocationOfItemInDB = ref(database, `shoppingList/${itemID}`);
+            remove(exactLocationOfItemInDB);
+        });
+
         
-
-        if (!newEl.style.backgroundColor) {
-            const colors = ["#FF6347", "#ff3399", "#ffbf47"];            
-            const randomColor = colors[Math.floor(Math.random() * colors.length)];
-            newEl.style.backgroundColor = randomColor; // Apply random color if not set
-        }
-
-        listEl.appendChild(newEl);
+        shoppingListEl.append(newEl);
 
         
     }
 }
 
 
-function clearListEl() {
-    listEl.innerHTML = ""
+function addRandomColor(item) {
+    if (!item.style.backgroundColor) {
+        const colors = ["#FF6347", "#ff3399", "#ffbf47"];            
+        const randomColor = colors[Math.floor(Math.random() * colors.length)];
+        item.style.backgroundColor = randomColor; 
+    }
+
 }
 

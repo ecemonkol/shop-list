@@ -20,6 +20,7 @@ h1 {
     padding: 20px;
     overflow: scroll;
     background-color: white;
+    border-radius: 10px;
 }
 
 img {
