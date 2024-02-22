@@ -23,7 +23,7 @@ addButtonEl.addEventListener("click", function () {
             addItemToList(snapshot)
         })
     } else {
-        alert('Please write an item')
+        alert('Please enter an item')
     }
 
     clearInputFieldEl();
@@ -37,7 +37,7 @@ get(shoppingListRef).then((snapshot) => {
     } else {
         const noItemsText = document.createElement("h2")
         shoppingListEl.appendChild(noItemsText);
-        noItemsText.innerHTML = "nothing here :/"
+        noItemsText.innerHTML = "nothing to buy :|"
     }
 })
 
