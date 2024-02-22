@@ -69,7 +69,8 @@ input::placeholder {
 }
 
 input:hover {
-    outline: solid #ff3399  4px;
+    box-shadow: 0 0 0 4px #ff3399; /* Simulate outline with box-shadow */
+    border-radius: 30px; /* Apply border-radius */
 }
 
 button {
@@ -85,7 +86,8 @@ button {
 }
 
 button:hover {
-    outline: solid #ff3399 4px;
+    box-shadow: 0 0 0 4px #ff3399; /* Simulate outline with box-shadow */
+    border-radius: 30px; /* Apply border-radius */
 }
 
 ul {
